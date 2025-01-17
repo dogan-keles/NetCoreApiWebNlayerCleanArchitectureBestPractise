@@ -4,15 +4,17 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace App.Repositories
 {
-    // DbContext sınıfını DbContext'ten türetmelisiniz
     public class AppDbContext : DbContext
     {
-        // DbContextOptions parametresi alarak constructor'ı tanımlayın
+        private readonly DbContextOptions<AppDbContext> _options;
+
+        
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
+            _options = options;
         }
 
-        // DbSet'ler burada tanımlanır
+        
         public DbSet<Product> Products { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
